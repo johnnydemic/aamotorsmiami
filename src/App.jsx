@@ -109,7 +109,7 @@ export default function App() {
       vehicleType: sanitize(form.vehicleType),
     };
     try {
-      await fetch("https://script.google.com/macros/sAKfycbzBOiJSZhUYhr3j1dAKAfah5ZmQWsSe1VHIOzmsUItoS2FPbRLn4mj6bbW5XwI1lqw/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbzBOiJSZhUYhr3j1dAKAfah5ZmQWsSe1VHIOzmsUItoS2FPbRLn4mj6bbW5XwI1lqw/exec", {
         method: "POST",
         mode: "no-cors",
         body: JSON.stringify(safeForm),
