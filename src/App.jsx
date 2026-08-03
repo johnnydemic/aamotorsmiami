@@ -81,41 +81,14 @@ export default function App() {
     e.preventDefault();
     if (submitting) return;
     setSubmitting(true);
-    if (form.honeypot) {
-      setSubmitting(false);
-      setSubmitted(true);
-      return;
-    }
-    const now = Date.now();
-    if (now - lastSubmit < 30000) {
-      alert("Please wait 30 seconds before submitting again.");
-      setSubmitting(false);
-      return;
-    }
-    const phoneDigits = form.phone.replace(/\D/g, "");
-    if (phoneDigits.length < 10) {
-      alert("Please enter a valid phone number.");
-      setSubmitting(false);
-      return;
-    }
-    setLastSubmit(now);
-    const safeForm = {
-      firstName: sanitize(form.firstName),
-      lastName: sanitize(form.lastName),
-      phone: sanitize(form.phone),
-      email: sanitize(form.email),
-      service: sanitize(form.service),
-      howSoon: sanitize(form.howSoon),
-      vehicleType: sanitize(form.vehicleType),
-    };
     try {
       await fetch("https://script.google.com/macros/s/AKfycbzBOiJSZhUYhr3j1dAKAfah5ZmQWsSe1VHIOzmsUItoS2FPbRLn4mj6bbW5XwI1lqw/exec", {
         method: "POST",
         mode: "no-cors",
-        body: JSON.stringify(safeForm),
+        body: JSON.stringify(form),
       });
     } catch (err) {
-      console.warn("Form submission error (non-critical):", err.message);
+      console.warn(err);
     }
     setSubmitting(false);
     setSubmitted(true);
